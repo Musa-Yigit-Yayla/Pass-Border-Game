@@ -1,5 +1,6 @@
 package com.mycompany.passbordergame;
 
+import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +21,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         
-        ImageView background = new ImageView(new Image("imgs/desert.jpg"));
+        ImageView background = new ImageView(new Image(new File("Pass-Border-Game\\PassBorderGame\\src\\main\\java\\imgs").toURI().toString()));
         Group group = new Group(background);
         scene = new Scene(group, 800, 800);
         stage.setScene(scene);
