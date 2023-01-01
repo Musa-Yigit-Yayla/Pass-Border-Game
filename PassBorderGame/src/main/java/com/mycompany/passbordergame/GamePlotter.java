@@ -43,7 +43,7 @@ public class GamePlotter {
                 int enemyCountOnThisPosition = 0;
                 for (EnemyVehicle e :
                         game.getEnemies()) {
-                    if (e.getLocation().x == j && e.getLocation().y == i)
+                    if (((Point)(e.getLocation())).getX() == j && ((Point)(e.getLocation())).getY() == i)
                         enemyCountOnThisPosition++;
                 }
                 System.out.print(enemyCountOnThisPosition == 0 ? "___" : "_" + enemyCountOnThisPosition + "_");

@@ -1,6 +1,6 @@
 package com.mycompany.passbordergame;
 
-import java.awt.Point;
+//import java.awt.Point;
 
 public abstract class EnemyVehicle implements Moveable, Destructible{
     private int x;

@@ -52,6 +52,7 @@ public class Game implements Difficulty {
         }
         System.out.println("Well played! Your score is: " + this.player.getScore());
     }
+    @Override
     public int getDifficulty(){
         return this.difficulty;
     }
