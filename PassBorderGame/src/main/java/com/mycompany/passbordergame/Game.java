@@ -2,6 +2,8 @@ package com.mycompany.passbordergame;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 public class Game implements Difficulty {
     private final int STARTING_DISTANCE = 20;
     private final int minX = 0;
@@ -52,6 +54,48 @@ public class Game implements Difficulty {
         }
         System.out.println("Well played! Your score is: " + this.player.getScore());
     }
+    /*
+    *@pane pane given from the App
+    * draw the vehicles on this pane
+    */
+    public void playFX(Pane pane){
+        while(passedVehicleCount < MAX_NO_OF_PASSED_VEHICLES){
+            this.printGame();
+
+            System.out.println("Enter x, y coordinates for the bomb: ");
+            this.player.attack(input.nextInt(), input.nextInt(),this.enemies);
+            
+            //check each enemy vehicle to replace the destroyed ones
+            for(int i = 0; i < enemies.size(); i++){
+                if(enemies.get(i).isDestroyed()){
+                    EnemyVehicle currEnemy = enemies.get(i);
+                    pane.getChildren().remove(currEnemy.getGUI());
+                    enemies.remove(i);
+                    
+                    //generate newVehicle
+                    EnemyVehicle newVehicle = this.getNewRandomEnemyVehicle();
+                    enemies.add(i,newVehicle);
+                    pane.getChildren().add(newVehicle.getGUI());
+                    this.player.incrementScore();
+                }
+            }
+            
+            //Move the enemies
+            for(int i = 0; i < enemies.size(); i++){
+                enemies.get(i).move();
+            }
+            //replace the ones which passed the border
+            for(int i = 0; i < enemies.size(); i++){
+                if(enemies.get(i).passedTheBorder()){
+                    this.passedVehicleCount++;
+                    enemies.remove(i);
+                    enemies.add(i,this.getNewRandomEnemyVehicle());
+                }
+            }
+        }
+        System.out.println("Well played! Your score is: " + this.player.getScore());
+        
+    }
     @Override
     public int getDifficulty(){
         return this.difficulty;
@@ -59,9 +103,9 @@ public class Game implements Difficulty {
     private void initializeVehicles(){//spawn initial vehicles wrt to difficulty
         int spawnNumber = 0;
         switch(difficulty){
-            case 1: spawnNumber = 2; maxX = 5; MAX_NO_OF_PASSED_VEHICLES = 5; break;
-            case 2: spawnNumber = 4; maxX = 10; MAX_NO_OF_PASSED_VEHICLES = 4; break;
-            case 3: spawnNumber = 6; maxX = 15; MAX_NO_OF_PASSED_VEHICLES= 3; break;
+            case 1: spawnNumber = 2; maxX = 5; MAX_NO_OF_PASSED_VEHICLES = 6; break;
+            case 2: spawnNumber = 4; maxX = 10; MAX_NO_OF_PASSED_VEHICLES = 5; break;
+            case 3: spawnNumber = 6; maxX = 15; MAX_NO_OF_PASSED_VEHICLES= 4; break;
         }
         while(spawnNumber > 0){
             enemies.add(this.getNewRandomEnemyVehicle());
