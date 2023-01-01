@@ -1,3 +1,5 @@
+package com.mycompany.passbordergame;
+
 public class Tank extends EnemyVehicle {
     private final double TANK_DAMAGE_RATIO = 0.5;
 

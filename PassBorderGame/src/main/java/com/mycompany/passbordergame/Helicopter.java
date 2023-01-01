@@ -1,3 +1,5 @@
+package com.mycompany.passbordergame;
+
 public class Helicopter extends EnemyVehicle {
 
     public Helicopter(int minX, int maxX, int y) {

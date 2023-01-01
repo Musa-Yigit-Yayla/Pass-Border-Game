@@ -1,3 +1,5 @@
+package com.mycompany.passbordergame;
+
 public interface Difficulty {
     public final int EASY = 1;
     public final int MEDIUM = 2;

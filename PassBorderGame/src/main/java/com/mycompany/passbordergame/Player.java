@@ -1,3 +1,5 @@
+package com.mycompany.passbordergame;
+
 import java.util.ArrayList;
 import java.awt.Point;
 public class Player {

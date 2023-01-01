@@ -1,3 +1,5 @@
+package com.mycompany.passbordergame;
+
 import java.util.Scanner;
 public class GameTester {
     public static void main(String[] args) {

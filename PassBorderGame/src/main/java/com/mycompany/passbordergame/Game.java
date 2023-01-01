@@ -1,3 +1,5 @@
+package com.mycompany.passbordergame;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Game implements Difficulty {

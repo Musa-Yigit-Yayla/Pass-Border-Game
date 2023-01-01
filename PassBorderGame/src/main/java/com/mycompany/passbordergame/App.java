@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.Group;
 import java.io.IOException;
 
 /**
@@ -17,7 +19,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        
+        ImageView background = new ImageView(new Image("imgs/desert.jpg"));
+        Group group = new Group(background);
+        scene = new Scene(group, 800, 800);
         stage.setScene(scene);
         stage.show();
     }
