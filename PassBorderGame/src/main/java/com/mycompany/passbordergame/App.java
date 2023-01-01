@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Group;
+import javafx.scene.layout.StackPane;
 import java.io.IOException;
 
 /**
@@ -21,9 +22,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         
-        ImageView background = new ImageView(new Image(new File("Pass-Border-Game\\PassBorderGame\\src\\main\\java\\imgs").toURI().toString()));
-        Group group = new Group(background);
-        scene = new Scene(group, 800, 800);
+        ImageView background = new ImageView(new Image(new File("Pass-Border-Game\\PassBorderGame\\src\\main\\java\\imgs\\desert.jpg").toURI().toString()));
+        //Group group = new Group(background);
+        StackPane pane = new StackPane();
+        pane.getChildren().add(background);
+        scene = new Scene(pane, 900, 1500);
         stage.setScene(scene);
         stage.show();
     }
