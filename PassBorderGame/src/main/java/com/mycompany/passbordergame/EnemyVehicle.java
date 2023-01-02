@@ -24,8 +24,15 @@ public abstract class EnemyVehicle implements Moveable, Destructible{
     public int getDistanceToBorder(){
         return this.y; // since the border is y = 0
     }
+    public int getX(){
+        return this.x;
+    }
+    public int getY(){
+        return this.getDistanceToBorder();
+    }
     abstract Group getGUI();
     abstract String getType();
+    
     @Override
     public Point getLocation() {
         return this.point;
