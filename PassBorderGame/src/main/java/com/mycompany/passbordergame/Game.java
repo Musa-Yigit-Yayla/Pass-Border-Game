@@ -1,10 +1,22 @@
 package com.mycompany.passbordergame;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 public class Game implements Difficulty {
+    
+    public static final int INITIAL_EXPLOSION_RADIUS = 20;
+    
     private final int STARTING_DISTANCE = 20;
     private final int minX = 0;
     private int maxX;//will be set accordingly to the difficulty
@@ -14,7 +26,11 @@ public class Game implements Difficulty {
     private int passedVehicleCount = 0;
     private int MAX_NO_OF_PASSED_VEHICLES; //will be used to determine when the game ends, varies with respect to difficulty
     private GamePlotter gamePlotter = new GamePlotter(this);
-
+    private Circle explosion;
+    private Pane pane;
+    private int explosionGrowthCount = 0; // how many times the current explosion has expended
+    
+    
     public Game(int difficulty){
         this.difficulty = difficulty;
         //create the player object
@@ -62,8 +78,22 @@ public class Game implements Difficulty {
         while(passedVehicleCount < MAX_NO_OF_PASSED_VEHICLES){
             this.printGame();
 
-            System.out.println("Enter x, y coordinates for the bomb: ");
-            this.player.attack(input.nextInt(), input.nextInt(),this.enemies);
+            //set the pane's event fired method
+            this.pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent e) {
+                    //drop bomb
+                    explosion = new Circle(INITIAL_EXPLOSION_RADIUS, e.getX(), e.getY());
+                    explosion.setFill(Color.ORANGE);
+                    Timeline tl = new Timeline();
+                    tl.setCycleCount(3);
+                    KeyValue keyValue = new KeyValue(explosion.radiusProperty(), 4 / 3.0);
+                    
+                    //tl.set
+                    BombHandler bombHandler = new BombHandler();
+                    tl.getKeyFrames().add(new KeyFrame(Duration.ofSeconds(1), bombHandler, keyValue));
+                }
+            });
             
             //check each enemy vehicle to replace the destroyed ones
             for(int i = 0; i < enemies.size(); i++){
@@ -142,5 +172,41 @@ public class Game implements Difficulty {
             }
         }*/
         this.gamePlotter.plot();
+    }
+    public static double distance(double x1, double y1, double x2, double y2){
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+    class BombHandler implements EventHandler<ActionEvent>{
+
+        @Override
+        public void handle(ActionEvent t) {
+            //this event handler will be called from the timer of the bomb
+            //remove the explosion from the pane
+            explosion.setRadius(explosion.getRadius() * (4 / 3.0));
+            explosionGrowthCount++;
+                    
+            if(explosionGrowthCount == 2){
+                
+                //check if any vehicle(s) are damaged
+                for(int i = 0; i < enemies.size(); i++){
+                    EnemyVehicle currEnemy = enemies.get(i);
+                    double enemyX = currEnemy.getX();
+                    double enemyY = currEnemy.getY();
+                
+                    double explosionCenterX = explosion.getCenterX();
+                    double explosionCenterY = explosion.getCenterY();
+                    
+                    double distanceToExplosion = Game.distance(enemyY, enemyY, explosionCenterX, explosionCenterY);
+                    if(distanceToExplosion < explosion.getRadius()){
+                        //damage the vehicle
+                        c
+                    }
+                }
+                explosionGrowthCount = 0;
+            }
+            
+            pane.getChildren().remove(explosion);
+        }
+            
     }
 }
