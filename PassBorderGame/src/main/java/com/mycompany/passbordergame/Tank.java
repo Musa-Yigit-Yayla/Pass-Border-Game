@@ -50,4 +50,11 @@ public class Tank extends EnemyVehicle {
         //add the visual elements into the group
         this.tankGUI.getChildren().addAll(palet, torso, turret, cannon, exitHatchet, machineGun, gun);
     }
+    
+    //Invoke from the Game class
+    //Might be problematic
+    @Override
+    public Group getGUI(){
+        return this.tankGUI;
+    }
 }

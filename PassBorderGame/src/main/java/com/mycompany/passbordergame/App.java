@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import java.io.IOException;
+import javafx.scene.layout.Pane;
 
 /**
  * JavaFX App
@@ -18,14 +19,17 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
+    private static int difficulty = 2;
     @Override
     public void start(Stage stage) throws IOException {
         
         ImageView background = new ImageView(new Image(new File("Pass-Border-Game\\PassBorderGame\\src\\main\\java\\imgs\\desert.jpg").toURI().toString()));
         //Group group = new Group(background);
-        StackPane pane = new StackPane();
+        Pane pane = new Pane();
         pane.getChildren().add(background);
+        
+        Game game = new Game(difficulty);
+        game.playFX(pane);
         scene = new Scene(pane, 900, 1500);
         stage.setScene(scene);
         stage.show();

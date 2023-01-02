@@ -2,6 +2,9 @@ package com.mycompany.passbordergame;
 
 //import java.awt.Point;
 
+import javafx.scene.Group;
+import javafx.scene.shape.Polygon;
+
 public abstract class EnemyVehicle implements Moveable, Destructible{
     private int x;
     private int y; //these denote positions
@@ -11,7 +14,8 @@ public abstract class EnemyVehicle implements Moveable, Destructible{
     //My instance variable declarations
     private double healthPoint = 100;
     private boolean passedTheBorder = false;
-
+    protected Polygon damageArea; // area in which the vehicle lives
+            
     protected EnemyVehicle(int minX, int maxX, int y){
         this.x = (int)(Math.random() * maxX) + minX;
         this.y = y;
@@ -20,6 +24,7 @@ public abstract class EnemyVehicle implements Moveable, Destructible{
     public int getDistanceToBorder(){
         return this.y; // since the border is y = 0
     }
+    abstract Group getGUI();
     abstract String getType();
     @Override
     public Point getLocation() {
