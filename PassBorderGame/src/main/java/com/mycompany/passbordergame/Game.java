@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle;
 public class Game implements Difficulty {
     
     public static final int INITIAL_EXPLOSION_RADIUS = 20;
+    public static final int DAMAGE = 50;
     
     private final int STARTING_DISTANCE = 20;
     private final int minX = 0;
@@ -91,7 +92,7 @@ public class Game implements Difficulty {
                     
                     //tl.set
                     BombHandler bombHandler = new BombHandler();
-                    tl.getKeyFrames().add(new KeyFrame(Duration.ofSeconds(1), bombHandler, keyValue));
+                   // tl.getKeyFrames().add(new KeyFrame(Duration.ofSeconds(1), bombHandler, keyValue));
                 }
             });
             
@@ -196,10 +197,15 @@ public class Game implements Difficulty {
                     double explosionCenterX = explosion.getCenterX();
                     double explosionCenterY = explosion.getCenterY();
                     
-                    double distanceToExplosion = Game.distance(enemyY, enemyY, explosionCenterX, explosionCenterY);
+                    double distanceToExplosion = Game.distance(enemyX, enemyY, explosionCenterX, explosionCenterY);
                     if(distanceToExplosion < explosion.getRadius()){
                         //damage the vehicle
-                        c
+                        switch(difficulty){
+                            case(1): currEnemy.takeDamage(DAMAGE * Difficulty.EASY_DAMAGE_RATE); break;
+                            case(2): currEnemy.takeDamage(DAMAGE * Difficulty.MEDIUM_DAMAGE_RATE); break;
+                            case(3): currEnemy.takeDamage(DAMAGE * Difficulty.HARD_DAMAGE_RATE); break;
+                        }
+                        
                     }
                 }
                 explosionGrowthCount = 0;

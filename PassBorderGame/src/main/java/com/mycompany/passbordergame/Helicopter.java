@@ -1,4 +1,5 @@
 package com.mycompany.passbordergame;
+import javafx.scene.Group;
 import javafx.scene.shape.*;
 
 public class Helicopter extends EnemyVehicle {
@@ -16,6 +17,11 @@ public class Helicopter extends EnemyVehicle {
     @Override
     public String getType() {
             return "Helicopter";
+    }
+
+    @Override
+    Group getGUI() {
+        
     }
     
 }

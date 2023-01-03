@@ -25,8 +25,11 @@ public class App extends Application {
         
         ImageView background = new ImageView(new Image(new File("Pass-Border-Game\\PassBorderGame\\src\\main\\java\\imgs\\desert.jpg").toURI().toString()));
         //Group group = new Group(background);
+        
+        Tank tank = new Tank(10, 200, 200);
         Pane pane = new Pane();
         pane.getChildren().add(background);
+        pane.getChildren().add(tank.getGUI());
         
         Game game = new Game(difficulty);
         game.playFX(pane);

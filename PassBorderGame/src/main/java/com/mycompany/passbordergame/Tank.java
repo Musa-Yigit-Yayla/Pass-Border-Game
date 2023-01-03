@@ -6,10 +6,13 @@ import javafx.scene.shape.*;
 public class Tank extends EnemyVehicle {
     private final double TANK_DAMAGE_RATIO = 0.5;
     private Group tankGUI = new Group();
+    private Polygon torso; // also damage area
+    private Polygon damageArea;
     
     public Tank(int minX, int maxX, int y){
         super(minX, maxX, y);
         this.setTankGUI();
+        this.damageArea = torso;
     }
     @Override
     public String getType(){
@@ -26,7 +29,7 @@ public class Tank extends EnemyVehicle {
         palet.setStroke(Color.BLACK);
         palet.setFill(Color.LIMEGREEN);
         
-        Polygon torso = new Polygon();
+        torso = new Polygon();
         torso.getPoints().addAll(2.0, 3.0, 2.0, 5.0, 1.0, 6.0, 1.0, 11.0, 2.0, 12.0, 2.0, 13.0, 8.0, 13.0, 9.0, 12.0, 9.0, 6.0, 8.0, 5.0, 8.0, 3.0);
         torso.setStroke(Color.BLACK);
         torso.setFill(Color.SANDYBROWN);
@@ -35,7 +38,7 @@ public class Tank extends EnemyVehicle {
         turret.setStroke(Color.BLACK);
         turret.setFill(Color.DARKGREEN);
         
-        Polygon cannon = new Polygon(4.5, 6.0, 5.5, 6.0, 4.5, 0.0, 5.5, 0.0);
+        Polyline cannon = new Polyline(4.5, 6.0, 5.5, 6.0, 4.5, 0.0, 5.5, 0.0);
         cannon.setFill(Color.DARKGREEN);
         cannon.setStroke(Color.DARKGREEN);
         
