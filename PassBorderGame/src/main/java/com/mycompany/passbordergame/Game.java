@@ -80,6 +80,7 @@ public class Game implements Difficulty {
             this.printGame();
 
             //set the pane's event fired method
+            /*
             this.pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent e) {
@@ -94,7 +95,7 @@ public class Game implements Difficulty {
                     BombHandler bombHandler = new BombHandler();
                    // tl.getKeyFrames().add(new KeyFrame(Duration.ofSeconds(1), bombHandler, keyValue));
                 }
-            });
+            });*/
             
             //check each enemy vehicle to replace the destroyed ones
             for(int i = 0; i < enemies.size(); i++){
