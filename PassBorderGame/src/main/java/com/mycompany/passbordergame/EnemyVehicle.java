@@ -1,4 +1,4 @@
-package com.mycompany.passbordergame;
+ package com.mycompany.passbordergame;
 
 //import java.awt.Point;
 

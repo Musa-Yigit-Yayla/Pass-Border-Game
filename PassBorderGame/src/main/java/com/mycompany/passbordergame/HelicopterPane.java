@@ -5,10 +5,18 @@
 package com.mycompany.passbordergame;
 
 
+import java.time.Duration;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
 import javafx.animation.Timeline;
+import javafx.geometry.Orientation;
+import javafx.geometry.NodeOrientation;
+import static javafx.util.Duration.INDEFINITE;
+import javafx.scene.transform.Rotate;
+import javafx.beans.value.ObservableValue;
 /**
  *
  * @author yigit
@@ -18,6 +26,9 @@ public class HelicopterPane extends Pane {
     private Pane skeletonPane = new Pane(); //pervanesiz helikopter pane'i
     private Polygon skeleton = new Polygon();
     private Rectangle cockpit;
+    private Rectangle pervaneler;
+    private Circle pervaneHolder = new Circle(15);
+    private Timeline propeller; // this is for rotating the pervane
     
     public static final Color damageTakenColor = Color.DARKRED;
     public static final double SKELETON_PANE_WIDTH = 90.0;
@@ -26,11 +37,18 @@ public class HelicopterPane extends Pane {
     public static final double COCKPIT_Y = 24.0;
     public static final double COCKPIT_WIDTH = 6.0;
     public static final double COCKPIT_LENGTH = 18.0;
+    public static final double PERVANELER_LENGTH = 72;
+    public static final double PERVANELER_WIDTH = 10;
+    public static final double CENTER_X = 45;
+    public static final double CENTER_Y = 84;
+    public static final double PERVANE_HOLDER_RADIUS = 15;
     
     public HelicopterPane(){
         this.helicopter = new Helicopter((int)SKELETON_PANE_HEIGHT, (int)(1920 - SKELETON_PANE_HEIGHT) , (int) App.SPAWN_LINE);
         this.setSkeleton();
         this.setCockpit();
+        this.setPervaneler();
+        this.setPropeller();
     }
     private void setSkeleton(){
         skeleton.getPoints().addAll(42.0 , 12.0);
@@ -68,6 +86,25 @@ public class HelicopterPane extends Pane {
         this.cockpit.setFill(Color.CYAN);
         this.cockpit.setStroke(Color.BLACK);
     }
-    
+    private void setPervaneler(){
+        this.pervaneler = new Rectangle(PERVANELER_LENGTH, PERVANELER_WIDTH);
+        this.pervaneler.setX(CENTER_X - PERVANELER_WIDTH);
+        this.pervaneler.setY(CENTER_Y - PERVANELER_LENGTH);
+        this.pervaneler.setFill(Color.BLACK);
+        this.pervaneHolder.setCenterX(CENTER_X);
+        this.pervaneHolder.setCenterY(CENTER_Y);
+        this.pervaneHolder.setFill(Color.DARKRED);
+        
+    }
+
+    private void setPropeller() {
+        this.propeller = new Timeline();
+        this.propeller.setCycleCount(-1);
+        Rotate rotate = new Rotate();
+        rotate.setPivotX(CENTER_X);
+        rotate.setPivotY(CENTER_Y);
+        this.propeller.getTransforms()
+        this.propeller.getKeyFrames().add(new KeyFrame(Duration.millis(2000), new KeyValue(this.propeller)));
+    }
     
 }

@@ -21,7 +21,7 @@ public class Helicopter extends EnemyVehicle {
 
     @Override
     Group getGUI() {
-        
+        return null;
     }
     
 }

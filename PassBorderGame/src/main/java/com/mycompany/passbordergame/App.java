@@ -14,12 +14,18 @@ import java.io.IOException;
 import javafx.scene.layout.Pane;
 
 /**
+ * Musa Yiğit Yayla
+ * 1/5/2023
  * JavaFX App
  */
 public class App extends Application {
 
     private static Scene scene;
     private static int difficulty = 2;
+    
+    public static final double SPAWN_LINE = 50; // Y = 50
+    public static final double BORDER_LINE = 1000; // Y = 1000
+    
     @Override
     public void start(Stage stage) throws IOException {
         
