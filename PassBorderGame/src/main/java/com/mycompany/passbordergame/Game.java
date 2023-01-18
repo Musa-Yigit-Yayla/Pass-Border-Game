@@ -154,6 +154,7 @@ public class Game implements Difficulty {
         else{
             vehicle = new Helicopter(minX,maxX,STARTING_DISTANCE);
         }
+        vehicle.setGame(this);
         return vehicle;
     }
     @Override

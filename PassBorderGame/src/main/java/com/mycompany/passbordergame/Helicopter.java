@@ -23,5 +23,10 @@ public class Helicopter extends EnemyVehicle {
     Group getGUI() {
         return null;
     }
+
+    @Override
+    protected void setDamageArea() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

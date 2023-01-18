@@ -14,12 +14,25 @@ public abstract class EnemyVehicle implements Moveable, Destructible{
     //My instance variable declarations
     private double healthPoint = 100;
     private boolean passedTheBorder = false;
+    private Game game; //game object
     protected Polygon damageArea; // area in which the vehicle lives
             
     protected EnemyVehicle(int minX, int maxX, int y){
         this.x = (int)(Math.random() * maxX) + minX;
         this.y = y;
         point = new Point(this.x,this.y);
+    }
+    
+    private void setEventWhenClicked(){
+        this.damageArea.setOnMouseClicked(e -> {
+            double damageRatio = 1.0;
+            switch(this.game.getDifficulty()){
+                case(0): damageRatio = Game.EASY_DAMAGE_RATE; break;
+                case(1): damageRatio = Game.MEDIUM_DAMAGE_RATE; break;
+                case(2): damageRatio = Game.HARD_DAMAGE_RATE; break;
+            }
+            this.takeDamage(Game.DAMAGE * damageRatio);
+        });
     }
     public int getDistanceToBorder(){
         return this.y; // since the border is y = 0
@@ -59,7 +72,11 @@ public abstract class EnemyVehicle implements Moveable, Destructible{
     public boolean passedTheBorder(){
         return this.passedTheBorder;
     }
+    public void setGame(Game game){
+        this.game = game;
+    }
     protected void incrementSpeed(){//will be used in the heli class
         speed++;
     }
+    protected abstract void setDamageArea();
 }

@@ -42,6 +42,8 @@ public class HelicopterPane extends Pane {
     public static final double CENTER_X = 45;
     public static final double CENTER_Y = 84;
     public static final double PERVANE_HOLDER_RADIUS = 15;
+    public static final double PERVANE_ROTATION_DEGREE = 45;
+    public static final int PERVANE_ROTATION_TIMES = 250;
     
     public HelicopterPane(){
         this.helicopter = new Helicopter((int)SKELETON_PANE_HEIGHT, (int)(1920 - SKELETON_PANE_HEIGHT) , (int) App.SPAWN_LINE);
@@ -99,12 +101,17 @@ public class HelicopterPane extends Pane {
 
     private void setPropeller() {
         this.propeller = new Timeline();
-        this.propeller.setCycleCount(-1);
+        this.propeller.setOnFinished(e -> {
+            //rotate pervane by static degree
+            this.pervaneler.setRotate(PERVANE_ROTATION_DEGREE);
+        });
+        this.propeller.setCycleCount(PERVANE_ROTATION_TIMES);
+        /*this.propeller.setCycleCount(-1);
         Rotate rotate = new Rotate();
         rotate.setPivotX(CENTER_X);
         rotate.setPivotY(CENTER_Y);
         this.propeller.getTransforms()
-        this.propeller.getKeyFrames().add(new KeyFrame(Duration.millis(2000), new KeyValue(this.propeller)));
+        this.propeller.getKeyFrames().add(new KeyFrame(Duration.millis(2000), new KeyValue(this.propeller)));*/
     }
     
 }

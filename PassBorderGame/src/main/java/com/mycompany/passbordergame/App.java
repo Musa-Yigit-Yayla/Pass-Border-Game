@@ -21,10 +21,13 @@ import javafx.scene.layout.Pane;
 public class App extends Application {
 
     private static Scene scene;
-    private static int difficulty = 2;
+    private static int difficulty = 2; // 0 easy 1 med // 2 hard
     
     public static final double SPAWN_LINE = 50; // Y = 50
     public static final double BORDER_LINE = 1000; // Y = 1000
+    public static final int EASY_DIFFICULTY = 0;
+    public static final int MEDIUM_DIFFICULTY = 1;
+    public static final int HARD_DIFFICULTY = 2;
     
     @Override
     public void start(Stage stage) throws IOException {
