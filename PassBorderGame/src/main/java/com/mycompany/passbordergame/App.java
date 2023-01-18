@@ -36,9 +36,11 @@ public class App extends Application {
         //Group group = new Group(background);
         
         Tank tank = new Tank(10, 200, 200);
+        Helicopter heli = new Helicopter(10, 400, 200);
         StackPane holderPane = new StackPane();
-        Pane pane = new Pane();
+        Pane pane = new StackPane();
         pane.getChildren().add(background);
+        pane.getChildren().add(heli.getHelicopterPane());
         holderPane.getChildren().add(pane);
         //pane.getChildren().add(tank.getGUI());
         

@@ -22,7 +22,7 @@ import javafx.beans.value.ObservableValue;
  * @author yigit
  */
 public class HelicopterPane extends Pane {
-    private Helicopter helicopter;
+    //private Helicopter helicopter;
     private Pane skeletonPane = new Pane(); //pervanesiz helikopter pane'i
     private Polygon skeleton = new Polygon();
     private Rectangle cockpit;
@@ -45,12 +45,13 @@ public class HelicopterPane extends Pane {
     public static final double PERVANE_ROTATION_DEGREE = 45;
     public static final int PERVANE_ROTATION_TIMES = 250;
     
-    public HelicopterPane(){
-        this.helicopter = new Helicopter((int)SKELETON_PANE_HEIGHT, (int)(1920 - SKELETON_PANE_HEIGHT) , (int) App.SPAWN_LINE);
+    public HelicopterPane(Helicopter helicopter){
+        //this.helicopter = new Helicopter((int)SKELETON_PANE_HEIGHT, (int)(1920 - SKELETON_PANE_HEIGHT) , (int) App.SPAWN_LINE);
         this.setSkeleton();
         this.setCockpit();
         this.setPervaneler();
         this.setPropeller();
+        //this.helicopter = helicopter;
     }
     private void setSkeleton(){
         skeleton.getPoints().addAll(42.0 , 12.0);
@@ -76,7 +77,7 @@ public class HelicopterPane extends Pane {
         skeleton.getPoints().addAll(36.0 , 12.0);
         
         this.skeleton.setFill(Color.DARKGRAY);
-        this.cockpit.setStroke(Color.BLACK);
+        this.skeleton.setStroke(Color.BLACK);
     }
     private void setCockpit(){
         this.cockpit = new Rectangle();
