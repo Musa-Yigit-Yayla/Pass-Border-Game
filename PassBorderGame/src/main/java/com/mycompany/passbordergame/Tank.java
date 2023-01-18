@@ -1,6 +1,9 @@
 package com.mycompany.passbordergame;
+import java.io.File;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
@@ -9,14 +12,17 @@ public class Tank extends EnemyVehicle {
     private Group tankGUI = new Group();
     private Polygon torso; // also damage area
     private Polygon damageArea;
+    private ImageView tankImg;
     
     public static final double TANK_SCALE = 150.0; // 30 PIXELS
     public static final int x = 30; // Value to add to the polygons' points
+    public static final double TANK_SCALE_RATIO = 1 / 7.0;
     
     public Tank(int minX, int maxX, int y){
         super(minX, maxX, y);
         this.setTankGUI();
         this.damageArea = torso;
+        this.setImage();
     }
     @Override
     public String getType(){
@@ -62,11 +68,22 @@ public class Tank extends EnemyVehicle {
             curr.scaleYProperty().multiply(TANK_SCALE);
         }
     }
-    
+    private void setImage(){
+        Image img = new Image(new File("Pass-Border-Game\\PassBorderGame\\src\\main\\java\\imgs\\tank.jpg").toURI().toString());
+        this.tankImg = new ImageView(img);
+    }
+    public ImageView getImage(){
+        return this.tankImg;
+    }
     //Invoke from the Game class
     //Might be problematic
     @Override
     public Group getGUI(){
         return this.tankGUI;
+    }
+
+    @Override
+    protected void setDamageArea() {
+        this.damageArea = this.torso;
     }
 }

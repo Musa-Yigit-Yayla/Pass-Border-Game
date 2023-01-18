@@ -36,13 +36,15 @@ public class App extends Application {
         //Group group = new Group(background);
         
         Tank tank = new Tank(10, 200, 200);
-        Pane pane = new StackPane();
+        StackPane holderPane = new StackPane();
+        Pane pane = new Pane();
         pane.getChildren().add(background);
-        pane.getChildren().add(tank.getGUI());
+        holderPane.getChildren().add(pane);
+        //pane.getChildren().add(tank.getGUI());
         
         Game game = new Game(difficulty);
         game.playFX(pane);
-        scene = new Scene(pane, 900, 1500);
+        scene = new Scene(holderPane, 900, 1500);
         stage.setScene(scene);
         stage.show();
     }

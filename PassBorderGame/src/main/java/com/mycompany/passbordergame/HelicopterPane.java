@@ -106,6 +106,7 @@ public class HelicopterPane extends Pane {
             this.pervaneler.setRotate(PERVANE_ROTATION_DEGREE);
         });
         this.propeller.setCycleCount(PERVANE_ROTATION_TIMES);
+        this.propeller.play();
         /*this.propeller.setCycleCount(-1);
         Rotate rotate = new Rotate();
         rotate.setPivotX(CENTER_X);
